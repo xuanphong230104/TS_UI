@@ -1,0 +1,49 @@
+@use "../../styles/variables" as *;
+
+.header-wrapper {
+  padding: 0px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+
+  @media (max-width: $screen-xs) {
+    position: fixed;
+    top: 0px;
+    z-index: 99;
+    width: 100%;
+  }
+
+  @media (min-width: $screen-md) {
+    .ant-input-search {
+      width: 400px;
+    }
+  }
+
+  .collapsed-side-nav-btn {
+    font-size: 16px;
+    width: 64px;
+    height: 64px;
+  }
+
+  .header-title {
+    margin-bottom: 0px;
+  }
+
+  .header-right {
+    margin-right: 24px;
+
+    .username {
+      margin-left: 8px;
+      cursor: pointer;
+    }
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+}

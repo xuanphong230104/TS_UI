@@ -1,0 +1,36 @@
+@import "@xyflow/react/dist/style.css";
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.centered-container {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.component-loading {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.page-title {
+  margin: 16px 0px;
+}
+
+.code-mirror-view {
+  overflow: auto;
+
+  .cm-content {
+    padding-right: 50px;
+  }
+}
