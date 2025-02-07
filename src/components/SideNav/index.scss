@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+
+.side-nav-wrapper {
+  background-color: #fff;
+
+  @media screen and (max-width: $screen-xs) {
+    display: none;
+  }
+}
+
+.mobile-side-nav {
+  .ant-menu-inline {
+    border: 0px !important;
+  }
+
+  .ant-drawer-body {
+    padding: 12px 0px;
+  }
+
+  @media screen and (min-width: $screen-xs) {
+    display: none;
+  }
+}
+
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+}

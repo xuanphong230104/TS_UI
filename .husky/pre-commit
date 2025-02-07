@@ -1,0 +1,13 @@
+GIT_STAGE_COMMAND="git diff --diff-filter=d --staged --name-only"
+
+echo "Checking coding style..."
+eval "$GIT_STAGE_COMMAND '*.js' '*.jsx' '*.css' '*.scss' '*.html' | grep '^src/'" | \
+xargs npx prettier --check || (echo "Please run 'npm run prettier'" && exit 1)
+
+echo "Checking lint for JS files..."
+$GIT_STAGE_COMMAND | grep -E '\.(js|jsx)$' | xargs -I % sh -c 'git show ":%" | eslint --stdin --stdin-filename "%"' || 
+(echo "Please fix linting issues before committing" && exit 1) 
+
+echo "Running unit tests..."
+eval "npm run test" || \
+(echo "Unit tests failed. Please fix the issues before committing." && exit 1)

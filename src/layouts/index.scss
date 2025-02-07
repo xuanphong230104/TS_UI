@@ -1,0 +1,23 @@
+@import "../styles/variables";
+
+.app-layout {
+  min-height: 100vh;
+
+  .content-wrapper {
+    margin: 2px 2px;
+    padding: 0px 6px;
+    min-height: 280px;
+    background-color: #fff;
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: $screen-xs) {
+  .app-layout {
+    margin-top: 64px;
+    .content-wrapper {
+      margin: 0px;
+      padding: 0px 6px;
+    }
+  }
+}
