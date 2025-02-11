@@ -35,8 +35,8 @@ const SideNav = (props) => {
 
   const items = [
     getItem("Dashboard", PATH.home, <PieChartOutlined />),
-    getItem("Check ins", PATH.checkins, <CheckCircleOutlined />),
-    getItem("Test Design", PATH.report, <FileTextOutlined />),
+    getItem("Check-ins", PATH.checkins, <CheckCircleOutlined />),
+    getItem("Report", PATH.report, <FileTextOutlined />),
     getItem("Users", PATH.users, <UserOutlined />),
   ];
 
