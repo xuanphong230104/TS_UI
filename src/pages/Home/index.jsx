@@ -49,12 +49,58 @@ const Home = () => {
                   <div class="avatar">NP</div>
                   <div class="post-info">
                     <p class="post-author">NGUYEN PHONG</p>
+                    <p class="post-time">2 days ago</p>
+                  </div>
+                  <div class="post-menu">...</div>
+                </div>
+
+                <div class="post-content">
+                  <div class="post-section">
+                    <div class="section-label">Blockers</div>
+                    <p class="section-text">Blocker test</p>
+                  </div>
+                  <div class="post-section">
+                    <div class="section-label">Next</div>
+                    <p class="section-text">
+                      Continue testing on Design on Figma
+                    </p>
+                  </div>
+
+                  <div class="post-section">
+                    <div class="section-label">Previously</div>
+                    <p class="section-text">Continued on designing UI</p>
+                  </div>
+
+                  <div class="post-footer">
+                    <div class="footer-item">
+                      <MessageOutlined />
+                      <span>0</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="updates-container">
+              <div className="time-card">
+                <div class="date-text">Wednesday</div>
+                <div class="time-text ">February 5</div>
+              </div>
+
+              <div class="post-container">
+                <div class="post-header">
+                  <div class="avatar">NP</div>
+                  <div class="post-info">
+                    <p class="post-author">NGUYEN PHONG</p>
                     <p class="post-time">6 days ago</p>
                   </div>
                   <div class="post-menu">...</div>
                 </div>
 
                 <div class="post-content">
+                  <div class="post-section">
+                    <div class="section-label">Blockers</div>
+                    <p class="section-text">Blocker test</p>
+                  </div>
                   <div class="post-section">
                     <div class="section-label">Next</div>
                     <p class="section-text">
@@ -86,7 +132,7 @@ const Home = () => {
                 <div class="post-header">
                   <div class="avatar">NP</div>
                   <div class="post-info">
-                    <p class="post-author">NGUYEN PHONG</p>
+                    <p class="post-author">NGUYEN Paul</p>
                     <p class="post-time">6 days ago</p>
                   </div>
                   <div class="post-menu">...</div>

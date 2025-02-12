@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { PATH } from "../constants";
 
 const Home = lazy(() => import("../pages/Home"));
+const Checkins = lazy(() => import("../pages/Checkins"));
 const TestDesign = lazy(() => import("../pages/TestDesign"));
 const History = lazy(() => import("../pages/History"));
 const Login = lazy(() => import("../pages/Login"));
@@ -29,6 +30,12 @@ export const routes = [
   {
     path: PATH.login,
     element: <Login />,
+    private: false,
+  },
+  {
+    path: PATH.checkins,
+    element: <Checkins />,
+    defaultLayout: true,
     private: false,
   },
   {
