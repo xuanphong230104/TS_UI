@@ -3,6 +3,7 @@ export const PATH = {
   login: "/login",
   report: "/report",
   checkins: "/checkins",
+  createTask: "/create",
   users: "/users",
 };
 

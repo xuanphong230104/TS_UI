@@ -1,21 +1,13 @@
 import React from "react";
-import { Button } from "antd";
-import { useState } from "react";
-import TaskModal from "../../components/TaskModal";
+import CreateTaskPage from "../../pages/CreateTaskPage";
+import { Navigate, useNavigate } from "react-router-dom";
 const Checkins = () => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
+ 
 
   return (
-    <div>
-      <div>
-        <Button onClick={() => setIsModalVisible(true)}>Create Task</Button>
-
-        <TaskModal
-          visible={isModalVisible}
-          onClose={() => setIsModalVisible(false)}
-        />
-      </div>
-    </div>
+   <div>
+      Check-ins
+   </div>
   );
 };
 

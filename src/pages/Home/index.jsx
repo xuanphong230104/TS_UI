@@ -32,11 +32,11 @@ const Home = () => {
           <Card
             className="dashboard-card"
             bordered={false}
-            style={{ boxShadow: "none" }}
+            style={{boxShadow: "none"}}
             tabList={PROJECT_TABS}
             activeTabKey={projectTabsKey}
             onTabChange={onProjectsTabChange}
-            bodyStyle={{ padding: 0 }}
+            styles={{ body: { padding: 0 } }}
           >
             <div class="updates-container">
               <div className="time-card">

@@ -1,0 +1,203 @@
+/* TaskModal.css */
+.custom-task-modal {
+    animation: modalFadeIn 0.3s ease-out;
+  }
+  
+  .custom-task-modal .ant-modal-content {
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background: linear-gradient(to bottom, #ffffff, #f8fafc);
+  }
+  
+  .custom-task-modal .ant-modal-header {
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    border: none;
+    padding: 24px;
+  }
+  
+  .custom-task-modal .ant-modal-title {
+    color: white !important;
+    font-size: 1.25rem;
+  }
+  
+  .modal-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+  }
+  
+  .custom-task-modal .ant-modal-close {
+    color: white;
+    transition: transform 0.3s ease;
+  }
+  
+  .custom-task-modal .ant-modal-close:hover {
+    transform: rotate(90deg);
+  }
+  
+  .custom-task-modal .ant-modal-body {
+    padding: 32px;
+  }
+  
+  .task-form .ant-form-item-label label {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.95rem;
+  }
+  
+  .custom-input,
+  .custom-textarea,
+  .custom-select .ant-select-selector {
+    border-radius: 12px !important;
+    border: 2px solid #e2e8f0 !important;
+    padding: 8px 16px !important;
+    height: auto !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .custom-input:hover,
+  .custom-textarea:hover,
+  .custom-select:hover .ant-select-selector {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
+  }
+  
+  .custom-input:focus,
+  .custom-textarea:focus,
+  .custom-select.ant-select-focused .ant-select-selector {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2) !important;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .priority-field {
+    grid-column: span 2;
+  }
+  
+  .select-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 4px;
+  }
+  
+  .option-icon {
+    color: #4f46e5;
+  }
+  
+  .option-icon.unassigned {
+    color: #94a3b8;
+  }
+  
+  .status-dot,
+  .priority-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .status-dot::after,
+  .priority-dot::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.3;
+    z-index: -1;
+    animation: pulse 2s infinite;
+  }
+  
+  .status-dot.todo { background-color: #94a3b8; }
+  .status-dot.in-progress { background-color: #3b82f6; }
+  .status-dot.done { background-color: #22c55e; }
+  
+  .priority-dot.low { background-color: #22c55e; }
+  .priority-dot.medium { background-color: #eab308; }
+  .priority-dot.high { background-color: #ef4444; }
+  
+  .custom-task-modal .ant-btn-primary {
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    border: none;
+    border-radius: 12px;
+    height: 44px;
+    padding: 0 24px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .custom-task-modal .ant-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
+  }
+  
+  .custom-task-modal .ant-btn-default {
+    border-radius: 12px;
+    height: 44px;
+    padding: 0 24px;
+    font-weight: 500;
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 640px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .priority-field {
+      grid-column: span 1;
+    }
+    
+    .custom-task-modal {
+      margin: 12px;
+    }
+  }

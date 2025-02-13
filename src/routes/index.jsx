@@ -7,7 +7,7 @@ const TestDesign = lazy(() => import("../pages/TestDesign"));
 const History = lazy(() => import("../pages/History"));
 const Login = lazy(() => import("../pages/Login"));
 const NotFound = lazy(() => import("../pages/NotFound"));
-
+const CreateTaskPage = lazy(() => import("../pages/CreateTaskPage"));
 export const routes = [
   {
     path: PATH.home,
@@ -35,6 +35,12 @@ export const routes = [
   {
     path: PATH.checkins,
     element: <Checkins />,
+    defaultLayout: true,
+    private: false,
+  },
+  {
+    path: PATH.createTask,
+    element: <CreateTaskPage />,
     defaultLayout: true,
     private: false,
   },
