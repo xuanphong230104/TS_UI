@@ -1,11 +1,7 @@
-@use "../../styles/variables" as *;
+@import "../../styles/variables";
 
 .side-nav-wrapper {
   background-color: #fff;
-
-  .ant-menu-item .anticon {
-    font-size: 18px;
-  }
 
   @media screen and (max-width: $screen-xs) {
     display: none;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Layout } from "antd";
-// import SideNav from "../components/SideNav";
+import PropTypes from "prop-types";
+import SideNav from "../components/SideNav";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./index.scss";
@@ -24,13 +25,13 @@ const AppLayout = ({ children }) => {
 
   return (
     <Layout className="app-layout" hasSider={true}>
-      {/* <SideNav
+      <SideNav
         collapsed={collapsed}
         setCollapsed={setCollapsed}
         drawerVisible={drawerVisible}
         setDrawerVisible={setDrawerVisible}
         isMobile={isMobile}
-      /> */}
+      />
       <Layout>
         <Header
           collapsed={collapsed}
@@ -44,6 +45,10 @@ const AppLayout = ({ children }) => {
       </Layout>
     </Layout>
   );
+};
+
+AppLayout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AppLayout;

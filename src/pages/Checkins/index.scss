@@ -1,0 +1,108 @@
+.check-in-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.check-in-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.page-title {
+  color: #1890ff;
+  margin-bottom: 2rem !important;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.team-select {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.content-input {
+  margin-top: 0.5rem;
+  border-radius: 4px;
+}
+
+.tasks-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.tasks-section {
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.task-select {
+  width: 100%;
+}
+
+.tasks-list {
+  margin-top: 1rem;
+  background: #fafafa;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.check-icon {
+  color: #52c41a;
+}
+
+.submit-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.submit-button {
+  min-width: 200px;
+  height: 45px;
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tasks-container {
+    grid-template-columns: 1fr;
+  }
+
+  .check-in-container {
+    margin: 1rem auto;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.check-in-card {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Hover Effects */
+.tasks-section:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.35);
+  transition: all 0.3s ease;
+}

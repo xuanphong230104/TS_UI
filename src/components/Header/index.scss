@@ -1,4 +1,4 @@
-@use "../../styles/variables" as *;
+@import "../../styles/variables";
 
 .header-wrapper {
   padding: 0px;
@@ -24,10 +24,6 @@
     font-size: 16px;
     width: 64px;
     height: 64px;
-  }
-
-  .header-title {
-    margin-bottom: 0px;
   }
 
   .header-right {
