@@ -1,4 +1,4 @@
-## TTS-UI
+## TS-UI
 
 An application used to control automation test, built with React, Redux, JavaScript, and SCSS.
 

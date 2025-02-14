@@ -116,7 +116,7 @@
 
 .status-dot::after,
 .priority-dot::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   left: -2px;
@@ -128,13 +128,25 @@
   z-index: -1;
 }
 
-.status-dot.todo { background-color: #94a3b8; }
-.status-dot.in-progress { background-color: #2563eb; }
-.status-dot.done { background-color: #22c55e; }
+.status-dot.todo {
+  background-color: #94a3b8;
+}
+.status-dot.in-progress {
+  background-color: #2563eb;
+}
+.status-dot.done {
+  background-color: #22c55e;
+}
 
-.priority-dot.low { background-color: #22c55e; }
-.priority-dot.medium { background-color: #eab308; }
-.priority-dot.high { background-color: #ef4444; }
+.priority-dot.low {
+  background-color: #22c55e;
+}
+.priority-dot.medium {
+  background-color: #eab308;
+}
+.priority-dot.high {
+  background-color: #ef4444;
+}
 
 .action-buttons {
   display: flex;

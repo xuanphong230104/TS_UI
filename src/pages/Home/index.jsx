@@ -1,7 +1,6 @@
-import { Button, Card, Col, Row, Space } from "antd";
+import { Card, Col, Row } from "antd";
 import { MessageOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import projectsData from "../../mocks/Projects.json";
 import "./index.scss";
 const PROJECT_TABS = [
   {
@@ -32,47 +31,47 @@ const Home = () => {
           <Card
             className="dashboard-card"
             bordered={false}
-            style={{boxShadow: "none"}}
+            style={{ boxShadow: "none" }}
             tabList={PROJECT_TABS}
             activeTabKey={projectTabsKey}
             onTabChange={onProjectsTabChange}
             styles={{ body: { padding: 0 } }}
           >
-            <div class="updates-container">
+            <div className="updates-container">
               <div className="time-card">
-                <div class="date-text">Wednesday</div>
-                <div class="time-text ">February 5</div>
+                <div className="date-text">Wednesday</div>
+                <div className="time-text ">February 5</div>
               </div>
 
-              <div class="post-container">
-                <div class="post-header">
-                  <div class="avatar">NP</div>
-                  <div class="post-info">
-                    <p class="post-author">NGUYEN PHONG</p>
-                    <p class="post-time">2 days ago</p>
+              <div className="post-container">
+                <div className="post-header">
+                  <div className="avatar">NP</div>
+                  <div className="post-info">
+                    <p className="post-author">NGUYEN PHONG</p>
+                    <p className="post-time">2 days ago</p>
                   </div>
-                  <div class="post-menu">...</div>
+                  <div className="post-menu">...</div>
                 </div>
 
-                <div class="post-content">
-                  <div class="post-section">
-                    <div class="section-label">Blockers</div>
-                    <p class="section-text">Blocker test</p>
+                <div className="post-content">
+                  <div className="post-section">
+                    <div className="section-label">Blockers</div>
+                    <p className="section-text">Blocker test</p>
                   </div>
-                  <div class="post-section">
-                    <div class="section-label">Next</div>
-                    <p class="section-text">
+                  <div className="post-section">
+                    <div className="section-label">Next</div>
+                    <p className="section-text">
                       Continue testing on Design on Figma
                     </p>
                   </div>
 
-                  <div class="post-section">
-                    <div class="section-label">Previously</div>
-                    <p class="section-text">Continued on designing UI</p>
+                  <div className="post-section">
+                    <div className="section-label">Previously</div>
+                    <p className="section-text">Continued on designing UI</p>
                   </div>
 
-                  <div class="post-footer">
-                    <div class="footer-item">
+                  <div className="post-footer">
+                    <div className="footer-item">
                       <MessageOutlined />
                       <span>0</span>
                     </div>
@@ -80,41 +79,41 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="updates-container">
+            <div className="updates-container">
               <div className="time-card">
-                <div class="date-text">Wednesday</div>
-                <div class="time-text ">February 5</div>
+                <div className="date-text">Wednesday</div>
+                <div className="time-text ">February 5</div>
               </div>
 
-              <div class="post-container">
-                <div class="post-header">
-                  <div class="avatar">NP</div>
-                  <div class="post-info">
-                    <p class="post-author">NGUYEN PHONG</p>
-                    <p class="post-time">6 days ago</p>
+              <div className="post-container">
+                <div className="post-header">
+                  <div className="avatar">NP</div>
+                  <div className="post-info">
+                    <p className="post-author">NGUYEN PHONG</p>
+                    <p className="post-time">6 days ago</p>
                   </div>
-                  <div class="post-menu">...</div>
+                  <div className="post-menu">...</div>
                 </div>
 
-                <div class="post-content">
-                  <div class="post-section">
-                    <div class="section-label">Blockers</div>
-                    <p class="section-text">Blocker test</p>
+                <div className="post-content">
+                  <div className="post-section">
+                    <div className="section-label">Blockers</div>
+                    <p className="section-text">Blocker test</p>
                   </div>
-                  <div class="post-section">
-                    <div class="section-label">Next</div>
-                    <p class="section-text">
+                  <div className="post-section">
+                    <div className="section-label">Next</div>
+                    <p className="section-text">
                       Continue testing on Design on Figma
                     </p>
                   </div>
 
-                  <div class="post-section">
-                    <div class="section-label">Previously</div>
-                    <p class="section-text">Continued on designing UI</p>
+                  <div className="post-section">
+                    <div className="section-label">Previously</div>
+                    <p className="section-text">Continued on designing UI</p>
                   </div>
 
-                  <div class="post-footer">
-                    <div class="footer-item">
+                  <div className="post-footer">
+                    <div className="footer-item">
                       <MessageOutlined />
                       <span>0</span>
                     </div>
@@ -122,37 +121,37 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="updates-container">
+            <div className="updates-container">
               <div className="time-card">
-                <div class="date-text">Tuesday</div>
-                <div class="time-text ">February 4</div>
+                <div className="date-text">Tuesday</div>
+                <div className="time-text ">February 4</div>
               </div>
 
-              <div class="post-container ">
-                <div class="post-header">
-                  <div class="avatar">NP</div>
-                  <div class="post-info">
-                    <p class="post-author">NGUYEN Paul</p>
-                    <p class="post-time">6 days ago</p>
+              <div className="post-container ">
+                <div className="post-header">
+                  <div className="avatar">NP</div>
+                  <div className="post-info">
+                    <p className="post-author">NGUYEN Paul</p>
+                    <p className="post-time">6 days ago</p>
                   </div>
-                  <div class="post-menu">...</div>
+                  <div className="post-menu">...</div>
                 </div>
 
-                <div class="post-content">
-                  <div class="post-section">
-                    <div class="section-label">Next</div>
-                    <p class="section-text">
+                <div className="post-content">
+                  <div className="post-section">
+                    <div className="section-label">Next</div>
+                    <p className="section-text">
                       Continue testing on Design on Figma
                     </p>
                   </div>
 
-                  <div class="post-section">
-                    <div class="section-label">Previously</div>
-                    <p class="section-text">Continued on designing UI</p>
+                  <div className="post-section">
+                    <div className="section-label">Previously</div>
+                    <p className="section-text">Continued on designing UI</p>
                   </div>
 
-                  <div class="post-footer">
-                    <div class="footer-item">
+                  <div className="post-footer">
+                    <div className="footer-item">
                       <MessageOutlined />
                       <span>0</span>
                     </div>

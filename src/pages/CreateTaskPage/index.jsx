@@ -1,5 +1,6 @@
 // CreateTaskPage.jsx
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import { Form, Input, Select, Button, Card, message } from "antd";
 import {
   UserOutlined,
@@ -240,6 +241,12 @@ const CreateTaskPage = ({
       </Card>
     </div>
   );
+};
+
+CreateTaskPage.propTypes = {
+  teamMembers: PropTypes.array,
+  onSubmit: PropTypes.func,
+  onBack: PropTypes.func,
 };
 
 export default CreateTaskPage;
