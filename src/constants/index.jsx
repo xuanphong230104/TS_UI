@@ -5,6 +5,7 @@ export const PATH = {
   checkins: "/checkins",
   createTask: "/create",
   users: "/users",
+  reports: "/report",
 };
 
 export const API_ENDPOINTS = {

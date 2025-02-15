@@ -4,6 +4,7 @@ import { PATH } from "../constants";
 const Home = lazy(() => import("../pages/Home"));
 const Checkins = lazy(() => import("../pages/Checkins"));
 const Login = lazy(() => import("../pages/Login"));
+const Report= lazy(() => import("../pages/Report"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const CreateTaskPage = lazy(() => import("../pages/CreateTaskPage"));
 export const routes = [
@@ -11,7 +12,7 @@ export const routes = [
     path: PATH.home,
     element: <Home />,
     defaultLayout: true,
-    private: true,
+    private: false,
   },
   {
     path: PATH.login,
@@ -27,6 +28,12 @@ export const routes = [
   {
     path: PATH.createTask,
     element: <CreateTaskPage />,
+    defaultLayout: true,
+    private: false,
+  },
+  {
+    path: PATH.report,
+    element: <Report />,
     defaultLayout: true,
     private: false,
   },
