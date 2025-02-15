@@ -87,6 +87,7 @@ const Checkins = () => {
 
     setLoading(true);
     // Simulate API call
+    console.log("data", tasks)
     setTimeout(() => {
       message.success("Check-in submitted successfully!");
       setLoading(false);

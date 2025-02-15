@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Radio, Button, Typography, Avatar, Spin } from 'antd';
-import { TeamOutlined, UserOutlined, CheckCircleOutlined, StarOutlined } from '@ant-design/icons';
-import './index.scss';
+import React, { useState, useEffect } from "react";
+import { Modal, Radio, Button, Typography, Avatar, Spin } from "antd";
+import {
+  TeamOutlined,
+  UserOutlined,
+  CheckCircleOutlined,
+  StarOutlined,
+} from "@ant-design/icons";
+import "./index.scss";
 
 const { Title, Text } = Typography;
 
@@ -15,44 +20,24 @@ const TeamSelectionModal = ({ visible, onTeamSelect, currentUser }) => {
       setTeams([
         {
           id: 1,
-          name: 'Development Team',
-          description: 'Frontend and Backend Development',
+          name: "Development Team",
+          description: "Frontend and Backend Development",
           memberCount: 8,
           activeProjects: 12,
-          gradient: 'linear-gradient(135deg, #1890ff, #096dd9)',
-          tags: ['React', 'Node.js', 'TypeScript'],
-          activity: 'high'
+          gradient: "linear-gradient(135deg, #1890ff, #096dd9)",
+          tags: ["React", "Node.js", "TypeScript"],
+          activity: "high",
         },
         {
           id: 2,
-          name: 'Design Team',
-          description: 'UI/UX and Product Design',
+          name: "Design Team",
+          description: "UI/UX and Product Design",
           memberCount: 5,
           activeProjects: 8,
-          gradient: 'linear-gradient(135deg, #722ed1, #531dab)',
-          tags: ['UI/UX', 'Figma', 'Design Systems'],
-          activity: 'medium'
+          gradient: "linear-gradient(135deg, #722ed1, #531dab)",
+          tags: ["UI/UX", "Figma", "Design Systems"],
+          activity: "medium",
         },
-        {
-          id: 3,
-          name: 'Marketing Team',
-          description: 'Digital Marketing and Growth',
-          memberCount: 6,
-          activeProjects: 10,
-          gradient: 'linear-gradient(135deg, #52c41a, #389e0d)',
-          tags: ['SEO', 'Content', 'Analytics'],
-          activity: 'high'
-        },
-        // {
-        //   id: 4,
-        //   name: 'Product Team',
-        //   description: 'Strategy and Innovation',
-        //   memberCount: 4,
-        //   activeProjects: 6,
-        //   gradient: 'linear-gradient(135deg, #faad14, #d48806)',
-        //   tags: ['Strategy', 'Research', 'Roadmap'],
-        //   activity: 'medium'
-        // }
       ]);
       setLoading(false);
     }, 1000);
@@ -66,7 +51,7 @@ const TeamSelectionModal = ({ visible, onTeamSelect, currentUser }) => {
 
   return (
     <Modal
-      visible={visible}
+      open={visible}
       title={null}
       footer={null}
       closable={false}
@@ -80,7 +65,7 @@ const TeamSelectionModal = ({ visible, onTeamSelect, currentUser }) => {
           </div>
           <Title level={3}>Welcome to Your Workspace</Title>
           <Text className="welcome-text">
-            Hi {currentUser?.name || 'there'}! Choose your team to get started
+            Hi {currentUser?.name || "there"}! Choose your team to get started
           </Text>
         </div>
 
@@ -92,36 +77,40 @@ const TeamSelectionModal = ({ visible, onTeamSelect, currentUser }) => {
             <Text>Fetching your teams...</Text>
           </div>
         ) : (
-          <Radio.Group 
-            onChange={(e) => setSelectedTeam(e.target.value)} 
+          <Radio.Group
+            onChange={(e) => setSelectedTeam(e.target.value)}
             value={selectedTeam}
             className="teams-container"
           >
             {teams.map((team, index) => (
               <Radio key={team.id} value={team.id} className="team-option">
-                <div 
+                <div
                   className="team-card"
-                  style={{ 
-                    '--team-gradient': team.gradient,
-                    '--animation-delay': `${index * 0.1}s`
+                  style={{
+                    "--team-gradient": team.gradient,
+                    "--animation-delay": `${index * 0.1}s`,
                   }}
                 >
                   <div className="team-card-content">
                     <div className="team-avatar-section">
-                      <Avatar 
-                        size={60} 
-                        style={{ 
+                      <Avatar
+                        size={60}
+                        style={{
                           background: team.gradient,
                         }}
                         icon={<TeamOutlined />}
                       />
                       <div className={`activity-indicator ${team.activity}`} />
                     </div>
-                    
+
                     <div className="team-info">
-                      <Text strong className="team-name">{team.name}</Text>
-                      <Text className="team-description">{team.description}</Text>
-                      
+                      <Text strong className="team-name">
+                        {team.name}
+                      </Text>
+                      <Text className="team-description">
+                        {team.description}
+                      </Text>
+
                       <div className="team-stats">
                         <div className="stat">
                           <UserOutlined />
@@ -134,8 +123,10 @@ const TeamSelectionModal = ({ visible, onTeamSelect, currentUser }) => {
                       </div>
 
                       <div className="team-tags">
-                        {team.tags.map(tag => (
-                          <span key={tag} className="tag">{tag}</span>
+                        {team.tags.map((tag) => (
+                          <span key={tag} className="tag">
+                            {tag}
+                          </span>
                         ))}
                       </div>
                     </div>
