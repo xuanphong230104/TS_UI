@@ -1,4 +1,5 @@
-/* CreateTaskPage.css */
+@import "../../styles/variables";
+
 .create-task-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -9,7 +10,7 @@
   margin-bottom: 32px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 72px;
 }
 
 .page-header h1 {
@@ -20,8 +21,9 @@
 
 .back-button {
   font-size: 16px;
-  padding: 0;
+  padding-left: 0;
   color: #2563eb;
+  margin-bottom: 12px;
 }
 
 .back-button:hover {
@@ -176,7 +178,7 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 992px) {
+@media (max-width: $screen-md) {
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -189,7 +191,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: $screen-xs) {
   .create-task-container {
     padding: 20px 16px;
   }

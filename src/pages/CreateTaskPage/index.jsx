@@ -47,6 +47,7 @@ const CreateTaskPage = ({
       };
 
       await onSubmit(taskData);
+     
       message.success("Task created successfully!");
       form.resetFields();
     } catch (error) {
@@ -63,15 +64,15 @@ const CreateTaskPage = ({
 
   return (
     <div className="create-task-container">
+      <Button
+        type="link"
+        icon={<ArrowLeftOutlined />}
+        onClick={onBack}
+        className="back-button"
+      >
+        Back to Tasks
+      </Button>
       <div className="page-header">
-        <Button
-          type="link"
-          icon={<ArrowLeftOutlined />}
-          onClick={onBack}
-          className="back-button"
-        >
-          Back to Tasks
-        </Button>
         <h1>Create New Task</h1>
       </div>
 

@@ -30,7 +30,7 @@ const Home = () => {
         <Col span={24}>
           <Card
             className="dashboard-card"
-            bordered={false}
+            variant={false}
             style={{ boxShadow: "none" }}
             tabList={PROJECT_TABS}
             activeTabKey={projectTabsKey}
