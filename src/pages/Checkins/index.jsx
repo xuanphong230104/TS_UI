@@ -58,11 +58,11 @@ const CheckInForm = () => {
     }
   };
 
-  const handleTeamChange = (teamId) => {
-    form.setFieldsValue({ tasks: [] });
-    setSelectedTasks([]);
-    fetchTeamTasks(teamId);
-  };
+  // const handleTeamChange = (teamId) => {
+  //   form.setFieldsValue({ tasks: [] });
+  //   setSelectedTasks([]);
+  //   fetchTeamTasks(teamId);
+  // };
 
   const handleAddPersonalTask = () => {
     const taskValue = form.getFieldValue("newTask");
@@ -70,12 +70,12 @@ const CheckInForm = () => {
       const newTask = {
         id: Date.now(),
         title: taskValue,
-        type: "personal",
         status: "Todo",
       };
       setSelectedTasks([...selectedTasks, newTask]);
       form.setFieldsValue({ newTask: "" });
     }
+    form.resetFields(["newTask"]);
   };
 
   const handleTeamTaskSelect = (taskId) => {
@@ -83,7 +83,6 @@ const CheckInForm = () => {
     if (task && !selectedTasks.find((t) => t.id === task.id)) {
       const newTask = {
         ...task,
-        type: "team",
         status: "Todo",
       };
       setSelectedTasks([...selectedTasks, newTask]);
@@ -202,12 +201,8 @@ const CheckInForm = () => {
               renderItem={(task) => (
                 <List.Item>
                   <Space>
-                    <CheckOutlined className="check-icon" />
-                    <Text>{task.title}</Text>
-                    <Tag color={task.type === "team" ? "blue" : "green"}>
-                      {task.type === "team" ? "Team" : "Personal"}
-                    </Tag>
                     <Tag color="orange">Todo</Tag>
+                    <Text>{task.title}</Text>
                   </Space>
                 </List.Item>
               )}
