@@ -18,6 +18,7 @@ import {
   TeamOutlined,
   ClockCircleOutlined,
 } from "@ant-design/icons";
+import HoveringMenu from "../../components/HoveringMenu";
 import "./index.scss";
 
 const { Title, Text } = Typography;
@@ -125,6 +126,7 @@ const CheckInForm = () => {
     }
   };
 
+ 
   return (
     <div className="check-in-container">
       <Card className="check-in-card">
@@ -139,19 +141,7 @@ const CheckInForm = () => {
           initialValues={{ tasks: [] }}
         >
           <div className="section">
-            <Form.Item
-              name="content"
-              label={<Text strong>1. Check-in Content</Text>}
-              rules={[
-                { required: true, message: "Please enter check-in content" },
-              ]}
-            >
-              <TextArea
-                placeholder="What are your plans for today?"
-                rows={4}
-                className="content-input"
-              />
-            </Form.Item>
+            <HoveringMenu  />
           </div>
 
           <div className="section">
