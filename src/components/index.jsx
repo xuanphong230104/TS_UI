@@ -1,6 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { cx, css } from '@emotion/css'
+// Import specific Ant Design Icons
+import { 
+  BoldOutlined, 
+  ItalicOutlined, 
+  UnderlineOutlined,
+  OrderedListOutlined,
+  UnorderedListOutlined,
+  QuestionOutlined
+} from '@ant-design/icons'
 
 export const Button = React.forwardRef(
   ({ className, active, reversed, ...props }, ref) => (
@@ -23,6 +32,7 @@ export const Button = React.forwardRef(
     />
   )
 )
+
 export const EditorValue = React.forwardRef(
   ({ className, value, ...props }, ref) => {
     const textLines = value.document.nodes
@@ -68,20 +78,41 @@ export const EditorValue = React.forwardRef(
     )
   }
 )
-export const Icon = React.forwardRef(({ className, ...props }, ref) => (
-  <span
-    {...props}
-    ref={ref}
-    className={cx(
-      'material-icons',
-      className,
-      css`
-        font-size: 18px;
-        vertical-align: text-bottom;
-      `
-    )}
-  />
-))
+
+// Updated Icon component using Ant Design icons
+export const Icon = React.forwardRef(({ className, children, ...props }, ref) => {
+  // Direct mapping of component instances rather than component classes
+  const iconComponents = {
+    'format_bold': <BoldOutlined />,
+    'format_italic': <ItalicOutlined />,
+    'format_underlined': <UnderlineOutlined />,
+    'format_list_numbered': <OrderedListOutlined />,
+    'format_list_bulleted': <UnorderedListOutlined />
+    // Add more mappings as needed
+  }
+  
+  // Get the appropriate icon or fallback to question icon
+  const iconElement = iconComponents[children] || <QuestionOutlined />
+
+  return (
+    <span
+      {...props}
+      ref={ref}
+      className={cx(
+        className,
+        css`
+          font-size: 18px;
+          vertical-align: text-bottom;
+          display: inline-flex;
+          align-items: center;
+        `
+      )}
+    >
+      {iconElement}
+    </span>
+  )
+})
+
 export const Instruction = React.forwardRef(({ className, ...props }, ref) => (
   <div
     {...props}
@@ -98,6 +129,7 @@ export const Instruction = React.forwardRef(({ className, ...props }, ref) => (
     )}
   />
 ))
+
 export const Menu = React.forwardRef(({ className, ...props }, ref) => (
   <div
     {...props}
@@ -117,11 +149,13 @@ export const Menu = React.forwardRef(({ className, ...props }, ref) => (
     )}
   />
 ))
+
 export const Portal = ({ children }) => {
   return typeof document === 'object'
     ? ReactDOM.createPortal(children, document.body)
     : null
 }
+
 export const Toolbar = React.forwardRef(({ className, ...props }, ref) => (
   <Menu
     {...props}

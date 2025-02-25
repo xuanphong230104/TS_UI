@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useEffect } from 'react'
 import { Slate, Editable, withReact, useSlate, useFocused } from 'slate-react'
-import { Editor, createEditor, Range } from 'slate'
+import { Editor, createEditor, Range, Transforms, Element as SlateElement } from 'slate'
 import { css } from '@emotion/css'
 import { withHistory } from 'slate-history'
 import { Button, Icon, Menu, Portal } from '../index.jsx'
@@ -11,6 +11,7 @@ const HoveringMenu = () => {
     <Slate editor={editor} initialValue={initialValue}>
       <HoveringToolbar />
       <Editable
+        renderElement={props => <Element {...props} />}
         renderLeaf={props => <Leaf {...props} />}
         placeholder="Enter some text..."
         onDOMBeforeInput={event => {
@@ -30,6 +31,9 @@ const HoveringMenu = () => {
     </Slate>
   )
 }
+
+const LIST_TYPES = ['numbered-list', 'bulleted-list']
+
 const toggleMark = (editor, format) => {
   const isActive = isMarkActive(editor, format)
   if (isActive) {
@@ -38,10 +42,65 @@ const toggleMark = (editor, format) => {
     Editor.addMark(editor, format, true)
   }
 }
+
 const isMarkActive = (editor, format) => {
   const marks = Editor.marks(editor)
   return marks ? marks[format] === true : false
 }
+
+const toggleBlock = (editor, format) => {
+  const isActive = isBlockActive(editor, format)
+  const isList = LIST_TYPES.includes(format)
+
+  Transforms.unwrapNodes(editor, {
+    match: n =>
+      !Editor.isEditor(n) &&
+      SlateElement.isElement(n) &&
+      LIST_TYPES.includes(n.type),
+    split: true,
+  })
+
+  const newProperties = {
+    type: isActive ? 'paragraph' : isList ? 'list-item' : format,
+  }
+  Transforms.setNodes(editor, newProperties)
+
+  if (!isActive && isList) {
+    const block = { type: format, children: [] }
+    Transforms.wrapNodes(editor, block)
+  }
+}
+
+const isBlockActive = (editor, format) => {
+  const { selection } = editor
+  if (!selection) return false
+
+  const [match] = Array.from(
+    Editor.nodes(editor, {
+      at: Editor.unhangRange(editor, selection),
+      match: n =>
+        !Editor.isEditor(n) &&
+        SlateElement.isElement(n) &&
+        n.type === format,
+    })
+  )
+
+  return !!match
+}
+
+const Element = ({ attributes, children, element }) => {
+  switch (element.type) {
+    case 'bulleted-list':
+      return <ul {...attributes}>{children}</ul>
+    case 'numbered-list':
+      return <ol {...attributes}>{children}</ol>
+    case 'list-item':
+      return <li {...attributes}>{children}</li>
+    default:
+      return <p {...attributes}>{children}</p>
+  }
+}
+
 const Leaf = ({ attributes, children, leaf }) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>
@@ -54,16 +113,20 @@ const Leaf = ({ attributes, children, leaf }) => {
   }
   return <span {...attributes}>{children}</span>
 }
+
 const HoveringToolbar = () => {
   const ref = useRef()
   const editor = useSlate()
   const inFocus = useFocused()
+
   useEffect(() => {
     const el = ref.current
     const { selection } = editor
+
     if (!el) {
       return
     }
+
     if (
       !selection ||
       !inFocus ||
@@ -73,6 +136,7 @@ const HoveringToolbar = () => {
       el.removeAttribute('style')
       return
     }
+
     const domSelection = window.getSelection()
     const domRange = domSelection.getRangeAt(0)
     const rect = domRange.getBoundingClientRect()
@@ -82,6 +146,7 @@ const HoveringToolbar = () => {
       rect.left + window.pageXOffset - el.offsetWidth / 2 + rect.width / 2
     }px`
   })
+
   return (
     <Portal>
       <Menu
@@ -106,10 +171,13 @@ const HoveringToolbar = () => {
         <FormatButton format="bold" icon="format_bold" />
         <FormatButton format="italic" icon="format_italic" />
         <FormatButton format="underlined" icon="format_underlined" />
+        <BlockButton format="numbered-list" icon="format_list_numbered" />
+        <BlockButton format="bulleted-list" icon="format_list_bulleted" />
       </Menu>
     </Portal>
   )
 }
+
 const FormatButton = ({ format, icon }) => {
   const editor = useSlate()
   return (
@@ -122,6 +190,20 @@ const FormatButton = ({ format, icon }) => {
     </Button>
   )
 }
+
+const BlockButton = ({ format, icon }) => {
+  const editor = useSlate()
+  return (
+    <Button
+      reversed
+      active={isBlockActive(editor, format)}
+      onClick={() => toggleBlock(editor, format)}
+    >
+      <Icon>{icon}</Icon>
+    </Button>
+  )
+}
+
 const initialValue = [
   {
     type: 'paragraph',
@@ -132,7 +214,7 @@ const initialValue = [
       { text: 'bold', bold: true },
       { text: ', ' },
       { text: 'italic', italic: true },
-      { text: ', or anything else you might want to do!' },
+      { text: ', create lists, or anything else you might want to do!' },
     ],
   },
   {
@@ -144,4 +226,5 @@ const initialValue = [
     ],
   },
 ]
+
 export default HoveringMenu
