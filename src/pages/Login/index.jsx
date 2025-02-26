@@ -32,7 +32,7 @@ const Login = (props) => {
   }, []);
 
   const loginSuccess = () => {
-    navigate(PATH.home);
+    navigate(PATH.teamselect);
   };
 
   const onFinish = (values) => {

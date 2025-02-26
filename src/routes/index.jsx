@@ -4,7 +4,7 @@ import { PATH } from "../constants";
 const Home = lazy(() => import("../pages/Home"));
 const Checkins = lazy(() => import("../pages/Checkins"));
 const Login = lazy(() => import("../pages/Login"));
-const Report= lazy(() => import("../pages/Report"));
+const TeamSelect= lazy(() => import("../pages/TeamSelect"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const CreateTaskPage = lazy(() => import("../pages/CreateTaskPage"));
 export const routes = [
@@ -32,8 +32,8 @@ export const routes = [
     private: false,
   },
   {
-    path: PATH.report,
-    element: <Report />,
+    path: PATH.teamselect,
+    element: <TeamSelect />,
     defaultLayout: true,
     private: false,
   },

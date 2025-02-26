@@ -6,6 +6,8 @@ import {
   CheckCircleOutlined,
   StarOutlined,
 } from "@ant-design/icons";
+import { API_ENDPOINTS } from "../../constants";
+import axiosClient from "../../helpers/axiosClient";
 import "./index.scss";
 
 const { Title, Text } = Typography;
@@ -16,31 +18,36 @@ const TeamSelectionModal = ({ visible, onTeamSelect, currentUser }) => {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setTeams([
-        {
-          id: 1,
-          name: "Development Team",
-          description: "Frontend and Backend Development",
-          memberCount: 8,
-          activeProjects: 12,
-          gradient: "linear-gradient(135deg, #1890ff, #096dd9)",
-          tags: ["React", "Node.js", "TypeScript"],
-          activity: "high",
-        },
-        {
-          id: 2,
-          name: "Design Team",
-          description: "UI/UX and Product Design",
-          memberCount: 5,
-          activeProjects: 8,
-          gradient: "linear-gradient(135deg, #722ed1, #531dab)",
-          tags: ["UI/UX", "Figma", "Design Systems"],
-          activity: "medium",
-        },
-      ]);
-      setLoading(false);
-    }, 1000);
+    axiosClient.get(API_ENDPOINTS.TEAM).then((response) => {
+      console.log("data", response.data.data);
+      setTimeout(() => {
+        const teamsWithGradient = response.data.data.map((team) => {
+          let gradient;
+          switch (team.id % 4) {
+            case 0:
+              gradient = "linear-gradient(135deg, #1890ff, #096dd9)";
+              break;
+            case 1:
+              gradient = "linear-gradient(135deg, #722ed1, #531dab)";
+              break;
+            case 2:
+              gradient = "linear-gradient(135deg, #52c41a, #389e0d)";
+              break;
+            case 3:
+              gradient = "linear-gradient(135deg, #faad14, #d48806)";
+              break;
+            default:
+              gradient = "linear-gradient(135deg, #1890ff, #096dd9)";
+          }
+          return {
+            ...team,
+            gradient,
+          };
+        });
+        setTeams(teamsWithGradient);
+        setLoading(false);
+      }, 1000);
+    });
   }, []);
 
   const handleTeamSelect = () => {
@@ -100,7 +107,6 @@ const TeamSelectionModal = ({ visible, onTeamSelect, currentUser }) => {
                         }}
                         icon={<TeamOutlined />}
                       />
-                      <div className={`activity-indicator ${team.activity}`} />
                     </div>
 
                     <div className="team-info">
@@ -116,18 +122,6 @@ const TeamSelectionModal = ({ visible, onTeamSelect, currentUser }) => {
                           <UserOutlined />
                           <span>{team.memberCount} members</span>
                         </div>
-                        <div className="stat">
-                          <StarOutlined />
-                          <span>{team.activeProjects} projects</span>
-                        </div>
-                      </div>
-
-                      <div className="team-tags">
-                        {team.tags.map((tag) => (
-                          <span key={tag} className="tag">
-                            {tag}
-                          </span>
-                        ))}
                       </div>
                     </div>
 
