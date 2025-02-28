@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useEffect } from 'react'
+import React, { useMemo, useRef, useEffect, useState } from 'react'
 import { Slate, Editable, withReact, useSlate, useFocused } from 'slate-react'
 import { Editor, createEditor, Range, Transforms, Element as SlateElement } from 'slate'
 import { css } from '@emotion/css'
@@ -7,8 +7,30 @@ import { Button, Icon, Menu, Portal } from '../index.jsx'
 
 const HoveringMenu = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
+  
+  // Load initial value from localStorage or use default
+  const initialValue = useMemo(() => {
+    const savedContent = localStorage.getItem('content')
+    return savedContent ? JSON.parse(savedContent) : defaultInitialValue
+  }, [])
+
   return (
-    <Slate editor={editor} initialValue={initialValue}>
+    <Slate 
+      editor={editor} 
+      initialValue={initialValue}
+      onChange={value => {
+        // Check if the change was to content and not just selection
+        const isAstChange = editor.operations.some(
+          op => 'set_selection' !== op.type
+        )
+        
+        if (isAstChange) {
+          // Save the value to localStorage
+          const content = JSON.stringify(value)
+          localStorage.setItem('content', content)
+        }
+      }}
+    >
       <HoveringToolbar />
       <Editable
         renderElement={props => <Element {...props} />}
@@ -204,13 +226,14 @@ const BlockButton = ({ format, icon }) => {
   )
 }
 
-const initialValue = [
+// Renamed from initialValue to defaultInitialValue
+const defaultInitialValue = [
   {
     type: 'paragraph',
     children: [
       {
         text: 'This example shows how you can make a hovering menu appear above your content, which you can use to make text ',
-      },
+      }, 
       { text: 'bold', bold: true },
       { text: ', ' },
       { text: 'italic', italic: true },

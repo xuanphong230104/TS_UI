@@ -201,25 +201,7 @@
         }
       }
 
-      .team-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-
-        .tag {
-          padding: 4px 12px;
-          border-radius: 16px;
-          background: #f0f5ff;
-          color: #1890ff;
-          font-size: 12px;
-          transition: all 0.3s ease;
-
-          &:hover {
-            background: #1890ff;
-            color: #ffffff;
-          }
-        }
-      }
+      
 
       .selection-indicator {
         position: absolute;

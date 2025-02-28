@@ -50,10 +50,7 @@ const CheckInForm = () => {
   // Fetch team tasks when team is selected
   const fetchTeamTasks = async (teamId) => {
     try {
-      // Replace with your API endpoint
-      const response = await fetch(`/api/teams/${teamId}/tasks`);
-      const data = await response.json();
-      setTeamTasks(data);
+      
     } catch (error) {
       message.error("Failed to fetch team tasks");
     }
