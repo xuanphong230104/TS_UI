@@ -13,4 +13,5 @@ export const API_ENDPOINTS = {
   LOGOUT: "/auth/token/logout/",
   USER: "/auth/users/",
   USER_ME: "/auth/users/me/",
+  TASK:"/core/api/v1/task"
 };

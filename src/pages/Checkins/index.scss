@@ -3,81 +3,470 @@
   margin: 2rem auto;
   padding: 0 1rem;
 
+  // Full responsive breakpoints
+  @media (max-width: 1200px) {
+    max-width: 90%;
+  }
+
+  @media (max-width: 992px) {
+    max-width: 95%;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 0 0.75rem;
+  }
+
+  @media (max-width: 576px) {
+    padding: 0 0.5rem;
+  }
+
   .check-in-card {
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: none;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    &.mobile-card {
+      padding: 16px;
+      
+      .ant-card-body {
+        padding: 16px 0;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      
+      @media (max-width: 768px) {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+    }
+
+    .card-header {
+      @media (max-width: 576px) {
+        margin-bottom: 0.5rem;
+      }
+    }
 
     .page-title {
       color: #1890ff;
-      margin-bottom: 2rem !important;
+      margin-bottom: 0.5rem !important;
       text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      
+      @media (max-width: 768px) {
+        font-size: 20px;
+        margin-bottom: 0.25rem !important;
+      }
+      
+      @media (max-width: 576px) {
+        font-size: 18px;
+      }
+      
+      .title-icon {
+        margin-right: 10px;
+        animation: pulse 2s infinite;
+        
+        @media (max-width: 576px) {
+          margin-right: 6px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #8c8c8c;
+      margin-bottom: 1.5rem;
+      
+      @media (max-width: 768px) {
+        font-size: 14px;
+        margin-bottom: 1rem;
+      }
+      
+      @media (max-width: 576px) {
+        font-size: 12px;
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    .divider-gradient {
+      background: linear-gradient(90deg, rgba(24, 144, 255, 0.1), rgba(24, 144, 255, 0.6), rgba(24, 144, 255, 0.1));
+      margin: 1.5rem 0;
+      height: 2px;
+      
+      @media (max-width: 768px) {
+        margin: 1rem 0;
+        height: 1px;
+      }
     }
 
     .section {
       margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      
+      @media (max-width: 768px) {
+        margin-bottom: 1.5rem;
+      }
+      
+      @media (max-width: 576px) {
+        margin-bottom: 1rem;
+      }
     }
 
-    .team-select {
-      width: 100%;
-      margin-top: 0.5rem;
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      
+      @media (max-width: 576px) {
+        margin-bottom: 0.75rem;
+      }
     }
 
-    .content-input {
-      margin-top: 0.5rem;
-      border-radius: 4px;
+    .section-title {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      
+      @media (max-width: 576px) {
+        font-size: 14px;
+        gap: 6px;
+      }
     }
 
-    .tasks-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin: 1rem 0;
+    .tasks-section-container {
+      position: relative;
     }
 
-    .tasks-section {
-      background: #fafafa;
-      border-radius: 4px;
+    .tasks-row {
+      margin-bottom: 1rem;
+      
+      @media (max-width: 576px) {
+        margin-bottom: 0.75rem;
+      }
     }
 
     .task-select {
       width: 100%;
+      margin-top: 5px;
+    }
+
+    .tasks-section {
+      background: #fafafa;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: 1px solid #f0f0f0;
+      
+      @media (max-width: 576px) {
+        border-radius: 6px;
+      }
+
+      &.team-tasks {
+        background: linear-gradient(to bottom, #f6f9ff, #f0f7ff);
+      }
+
+      &.personal-tasks {
+        background: linear-gradient(to bottom, #f9f9f9, #f5f5f5);
+      }
+
+      .ant-card-head {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 8px 8px 0 0;
+        
+        @media (max-width: 576px) {
+          padding: 0 12px;
+          min-height: 40px;
+          border-radius: 6px 6px 0 0;
+          
+          .ant-card-head-title {
+            padding: 12px 0;
+            font-size: 14px;
+          }
+        }
+      }
+      
+      .ant-card-body {
+        @media (max-width: 576px) {
+          padding: 12px;
+        }
+      }
+    }
+
+    .task-input {
+      
+      @media (max-width: 576px) {
+        padding: 6px 8px;
+      }
+      
+      .input-icon {
+        color: #1890ff;
+        opacity: 0.6;
+      }
+    }
+
+    .add-button {
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: #096dd9;
+      }
+      
+      @media (max-width: 576px) {
+        padding: 0 10px;
+      }
     }
 
     .tasks-list {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       background: #fafafa;
-      padding: 1rem;
-      border-radius: 4px;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #f0f0f0;
+      max-height: 300px;
+      overflow-y: auto;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.03);
+      
+      @media (max-width: 768px) {
+        margin-top: 1rem;
+        max-height: 250px;
+      }
+      
+      @media (max-width: 576px) {
+        margin-top: 0.75rem;
+        border-radius: 6px;
+        padding: 0.25rem;
+      }
+      
+      &.mobile-list {
+        .ant-list-empty-text {
+          padding: 1rem;
+        }
+        
+        .ant-empty-image {
+          height: 40px;
+        }
+        
+        .ant-empty-description {
+          font-size: 12px;
+        }
+      }
+      
+      .ant-list-empty-text {
+        padding: 2rem;
+        
+        @media (max-width: 768px) {
+          padding: 1.5rem;
+        }
+      }
     }
 
-    .check-icon {
-      color: #52c41a;
+    .task-item {
+      border-radius: 6px;
+      padding: 0 10px;
+      margin-bottom: 8px;
+      border: 1px solid transparent;
+      background-color: white;
+      transition: all 0.2s ease-in-out;
+      
+      @media (max-width: 576px) {
+        border-radius: 4px;
+        margin-bottom: 6px;
+        padding: 0 6px;
+      }
+      
+      &:hover {
+        background-color: #f5f5f5;
+        border-color: #e8e8e8;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+        
+        @media (max-width: 768px) {
+          transform: translateY(-1px);
+        }
+      }
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      &.mobile-task-item {
+        .ant-list-item-action {
+          margin-left: 0;
+          padding: 0 6px;
+        }
+      }
+    }
+
+    .task-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      
+      @media (max-width: 576px) {
+        gap: 6px;
+      }
+    }
+    
+    .mobile-task-content {
+      width: 100%;
+      
+      .mobile-task-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+      
+      .mobile-task-footer {
+        padding-left: 4px;
+      }
+    }
+    
+    .mobile-actions {
+      margin-top: 4px;
+    }
+
+    .task-title {
+      flex-grow: 1;
+      margin-left: 5px;
+      
+      @media (max-width: 576px) {
+        font-size: 14px;
+        margin-left: 3px;
+      }
+    }
+
+    .task-time {
+      font-size: 12px;
+      white-space: nowrap;
+      
+      @media (max-width: 576px) {
+        font-size: 11px;
+      }
+    }
+
+    .status-tag {
+      border-radius: 4px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      @media (max-width: 576px) {
+        padding: 0 4px;
+        font-size: 10px;
+      }
+    }
+
+    .action-button {
+      opacity: 0.6;
+      transition: all 0.2s ease;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      
+      @media (max-width: 576px) {
+        width: 28px;
+        height: 28px;
+      }
+      
+      &:hover {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+      
+      &.edit-button:hover {
+        color: #1890ff;
+      }
+      
+      &.delete-button:hover {
+        color: #ff4d4f;
+        background-color: rgba(255, 77, 79, 0.05);
+      }
     }
 
     .submit-section {
       text-align: center;
       margin-top: 2rem;
+      margin-bottom: 1rem;
+      
+      @media (max-width: 768px) {
+        margin-top: 1.5rem;
+      }
+      
+      @media (max-width: 576px) {
+        margin-top: 1rem;
+      }
     }
 
     .submit-button {
       min-width: 200px;
       height: 45px;
       font-size: 16px;
+      border-radius: 6px;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      
+      @media (max-width: 768px) {
+        min-width: 160px;
+        height: 40px;
+        font-size: 15px;
+      }
+      
+      @media (max-width: 576px) {
+        height: 38px;
+        font-size: 14px;
+        border-radius: 4px;
+        width: 100%;
+      }
+      
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
+        
+        @media (max-width: 768px) {
+          transform: translateY(-1px);
+        }
+      }
+      
+      &:active:not(:disabled) {
+        transform: translateY(0);
+      }
+      
+      &:disabled {
+        opacity: 0.6;
+      }
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .tasks-container {
-        grid-template-columns: 1fr;
+    /* Animation Definitions */
+    @keyframes pulse {
+      0% {
+        opacity: 0.6;
       }
-
-      .check-in-container {
-        margin: 1rem auto;
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.6;
       }
     }
 
-    /* Animations */
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -89,20 +478,254 @@
       }
     }
 
-    .check-in-card {
-      animation: fadeIn 0.3s ease-out;
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
-    /* Hover Effects */
-    .tasks-section:hover {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
-      transition: all 0.3s ease;
+    .animated-form {
+      animation: fadeIn 0.4s ease-out;
     }
 
-    .submit-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(24, 144, 255, 0.35);
+    .task-item {
+      animation: slideInRight 0.3s ease-out;
+    }
+
+    .hovering-menu-animated {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .task-counter {
+      animation: pulse 2s infinite;
+    }
+  }
+
+  /* Edit Modal Styling */
+  .edit-modal {
+    .modal-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #1890ff;
+    }
+    
+    .edit-input {
+      border-radius: 4px;
       transition: all 0.3s ease;
+      
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .ant-modal-content {
+        padding: 16px;
+      }
+      
+      .ant-modal-header {
+        padding: 16px 16px 8px;
+      }
+      
+      .ant-modal-body {
+        padding: 16px;
+      }
+      
+      .ant-modal-footer {
+        padding: 8px 16px 16px;
+        margin-top: 0;
+      }
+      
+      .ant-btn {
+        padding: 4px 12px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  /* Responsive adjustments for Ant Design components */
+  @media (max-width: 576px) {
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+    
+    .ant-form-item-label > label {
+      font-size: 14px;
+    }
+    
+    .ant-form-item-explain {
+      font-size: 12px;
+    }
+    
+    .ant-input {
+      height: 36px;
+      font-size: 14px;
+    }
+    
+    .ant-select {
+      font-size: 14px;
+    }
+    
+    .ant-select-selection-item {
+      font-size: 14px;
+    }
+    
+    .ant-select-dropdown {
+      font-size: 14px;
+    }
+    
+    .ant-btn {
+      height: 36px;
+      font-size: 14px;
+    }
+    
+    .ant-list-items {
+      padding: 4px;
+    }
+  }
+  
+  /* Additional tablet-specific adjustments */
+  @media (min-width: 577px) and (max-width: 768px) {
+    .ant-form-item {
+      margin-bottom: 20px;
+    }
+    
+    .ant-list-items {
+      padding: 6px;
+    }
+  }
+  
+  /* Tooltip and popover adjustments */
+  .ant-tooltip, .ant-popover {
+    @media (max-width: 576px) {
+      max-width: 250px;
+      
+      .ant-tooltip-inner,
+      .ant-popover-inner {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+      
+      .ant-popover-buttons {
+        margin-top: 6px;
+        
+        .ant-btn {
+          padding: 0 8px;
+          font-size: 12px;
+          height: 28px;
+        }
+      }
+    }
+  }
+  
+  /* Loading state styling */
+  .ant-spin {
+    @media (max-width: 576px) {
+      .ant-spin-dot {
+        font-size: 20px;
+      }
+      
+      .ant-spin-text {
+        padding-top: 5px;
+        font-size: 12px;
+      }
+    }
+  }
+  
+  /* Empty state styling */
+  .ant-empty {
+    @media (max-width: 768px) {
+      padding: 12px 0;
+      
+      .ant-empty-image {
+        height: 40px;
+      }
+      
+      .ant-empty-description {
+        font-size: 13px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      padding: 8px 0;
+      
+      .ant-empty-image {
+        height: 32px;
+      }
+      
+      .ant-empty-description {
+        font-size: 12px;
+      }
+    }
+  }
+  
+  /* Badge styling */
+  .ant-badge {
+    @media (max-width: 576px) {
+      .ant-badge-count {
+        font-size: 10px;
+        height: 18px;
+        min-width: 18px;
+        line-height: 18px;
+      }
+    }
+  }
+  
+  /* Notification styling */
+  .ant-message {
+    @media (max-width: 576px) {
+      top: 12px;
+      
+      .ant-message-notice-content {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+    }
+  }
+  
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Print media query for check-in report */
+  @media print {
+    .check-in-container {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      
+      .check-in-card {
+        box-shadow: none;
+        border: none;
+      }
+      
+      .add-button,
+      .action-button,
+      .submit-section {
+        display: none;
+      }
+      
+      .tasks-list {
+        max-height: none;
+        overflow: visible;
+        box-shadow: none;
+      }
+      
+      .task-item {
+        break-inside: avoid;
+      }
     }
   }
 }
