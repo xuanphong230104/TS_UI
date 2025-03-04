@@ -31,13 +31,13 @@ import {
   CalendarOutlined,
   FileTextOutlined,
   FireOutlined,
-  MenuOutlined
+  
 } from "@ant-design/icons";
 import HoveringMenu from "../../components/HoveringMenu";
 import "./index.scss";
 
 const { Title, Text, Paragraph } = Typography;
-const { TextArea } = Input;
+
 
 const CheckInForm = () => {
   const [form] = Form.useForm();
@@ -330,7 +330,7 @@ const CheckInForm = () => {
           className="animated-form"
         >
           <div className="section">
-            <HoveringMenu className="hovering-menu-animated" />
+            <HoveringMenu tasks={selectedTasks} className="hovering-menu-animated"/>
           </div>
 
           <div className="section tasks-section-container">

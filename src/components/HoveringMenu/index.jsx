@@ -5,7 +5,7 @@ import { css } from '@emotion/css'
 import { withHistory } from 'slate-history'
 import { Button, Icon, Menu, Portal } from '../index.jsx'
 
-const HoveringMenu = () => {
+const HoveringMenu = ({ tasks = [] }) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
   
   // Load initial value from localStorage or use default
@@ -13,6 +13,32 @@ const HoveringMenu = () => {
     const savedContent = localStorage.getItem('content')
     return savedContent ? JSON.parse(savedContent) : defaultInitialValue
   }, [])
+
+  // Update editor content when tasks change
+  useEffect(() => {
+    if (tasks.length > 0) {
+      const taskNodes = tasks.map(task => ({
+        type: 'list-item',
+        children: [{ text: task.title }]
+      }))
+
+      const numberedList = {
+        type: 'numbered-list',
+        children: taskNodes
+      }
+
+      // Clear existing content
+      Transforms.delete(editor, {
+        at: {
+          anchor: Editor.start(editor, []),
+          focus: Editor.end(editor, [])
+        }
+      })
+
+      // Insert new content
+      Transforms.insertNodes(editor, numberedList)
+    }
+  }, [tasks, editor])
 
   return (
     <Slate 
@@ -232,7 +258,7 @@ const defaultInitialValue = [
     type: 'paragraph',
     children: [
       {
-        text: 'This example shows how you can make a hovering menu appear above your content, which you can use to make text ',
+        text: 'Please select tasks or create new tasks then write description for the task here!! ',
       }, 
       { text: 'bold', bold: true },
       { text: ', ' },
