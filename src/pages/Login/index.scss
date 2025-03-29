@@ -1,0 +1,33 @@
+@import "../../styles/variables";
+
+.login-container {
+  .login-left {
+    display: flex;
+    justify-content: center;
+    background-color: rgba($color: #000000, $alpha: 0.09);
+    padding: 24px;
+
+    .ant-typography {
+      text-transform: uppercase;
+    }
+
+    img {
+      margin-top: 24px;
+    }
+  }
+
+  .login-right {
+    padding: 0px 24px;
+    display: flex;
+  }
+
+  @media screen and (max-width: $screen-sm) {
+    .login-right .ant-flex {
+      align-items: center;
+    }
+  }
+
+  @media screen and (min-width: $screen-sm) {
+    height: 100vh;
+  }
+}

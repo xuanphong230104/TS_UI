@@ -1,0 +1,342 @@
+.report-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  
+    @media (max-width: 768px) {
+      max-width: 100%;
+      margin: 1rem auto;
+    }
+  
+    .section-header {
+      margin: 20px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  
+      .section-title {
+        margin-right: 10px;
+      }
+    }
+  
+    .section-description {
+      margin-bottom: 15px;
+    }
+  
+    .report-card {
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transition: box-shadow 0.3s ease;
+  
+      &:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+    }
+  
+    .page-title {
+      color: #1890ff;
+      text-align: center;
+      margin-bottom: 0.5rem;
+  
+      .title-icon {
+        margin-right: 8px;
+      }
+    }
+  
+    .subtitle {
+      display: block;
+      text-align: center;
+      color: #8c8c8c;
+      margin-bottom: 1rem;
+    }
+  
+    .divider-gradient {
+      background: linear-gradient(90deg, rgba(24,144,255,0.1) 0%, rgba(24,144,255,0.5) 50%, rgba(24,144,255,0.1) 100%);
+      margin: 16px 0;
+      height: 1px;
+    }
+  
+    .tasks-list {
+      border: 1px solid #f0f0f0;
+      border-radius: 8px;
+      background: #fafafa;
+      padding: 8px;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 16px;
+  
+      @media (max-width: 768px) {
+        max-height: 350px;
+      }
+    }
+  
+    .task-item {
+      background-color: white;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+      padding: 12px;
+  
+      &:hover {
+        background-color: #f5f5f5;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+  
+      .task-content {
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        width: 100%;
+  
+        @media (max-width: 768px) {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+  
+      .task-title {
+        flex: 1;
+        font-weight: 500;
+        min-width: 150px;
+      }
+  
+      .task-progress {
+        min-width: 120px;
+  
+        @media (max-width: 768px) {
+          width: 100%;
+          margin-top: 8px;
+        }
+      }
+  
+      .task-notes {
+        width: 100%;
+        margin-top: 10px;
+  
+        .task-notes-input {
+          border-radius: 4px;
+          resize: none;
+          transition: all 0.3s;
+  
+          &:hover, &:focus {
+            border-color: #40a9ff;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+          }
+        }
+      }
+  
+      .action-button {
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+  
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+  
+      .done-button-active {
+        background-color: #52c41a;
+        color: white;
+        
+        &:hover {
+          background-color: #52c41a;
+          color: white;
+        }
+      }
+    }
+  
+    .mobile-task-item {
+      padding: 8px;
+  
+      .mobile-task-header {
+        margin-left: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+  
+      .mobile-task-progress {
+        margin: 10px 8px;
+      }
+  
+      .mobile-task-notes {
+        margin: 8px;
+      }
+  
+      .mobile-actions {
+        display: flex;
+        gap: 5px;
+      }
+    }
+  
+    .submit-section {
+      text-align: center;
+      margin-top: 1.5rem;
+  
+      button {
+        min-width: 180px;
+        height: 42px;
+        border-radius: 6px;
+        transition: all 0.3s;
+  
+        @media (max-width: 768px) {
+          width: 100%;
+        }
+  
+        &:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+        }
+      }
+    }
+  
+    .progress-slider-container {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
+      .ant-slider {
+        width: 100%;
+        margin-bottom: 24px;
+      }
+  
+      .progress-display {
+        margin-top: 16px;
+      }
+    }
+  
+    // Special styles for status tags
+    .status-tag {
+      transition: all 0.3s;
+      font-size: 12px;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  // Animation classes
+  .animated-form {
+    .section {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+  }
+  
+  .hovering-menu-animated {
+    transition: all 0.3s;
+    
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  // Utility classes and responsive adjustments
+  @media (max-width: 576px) {
+    .ant-form-item {
+      margin-bottom: 16px;
+    }
+  
+    .ant-modal-content {
+      padding: 16px;
+    }
+  
+    .ant-empty-description {
+      font-size: 12px;
+    }
+  
+    .ant-btn {
+      font-size: 14px;
+    }
+  }
+  
+  // Print styles
+  @media print {
+    .report-container {
+      max-width: 100%;
+      margin: 0;
+  
+      .report-card {
+        box-shadow: none;
+        border: none;
+      }
+  
+      .action-button,
+      .submit-section,
+      .ant-progress-circle {
+        display: none;
+      }
+  
+      .task-notes-input {
+        border: none;
+        padding: 0;
+      }
+    }
+  }
+
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.task-info {
+  margin: 8px 0;
+}
+
+.task-description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.priority-tag {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.mobile-task-info {
+  margin: 8px 0;
+  padding: 0 8px;
+}
+
+.mobile-task-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mobile-task-header .ant-space {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
