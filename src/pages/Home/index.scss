@@ -75,6 +75,15 @@
         }
       }
 
+      .post-tag {
+        padding: 4px 12px;
+        background-color: #e6f4ff;
+        color: #1677ff;
+        border-radius: 4px;
+        font-size: 14px;
+        margin-right: 12px;
+      }
+
       .post-menu {
         color: #6b7280;
         font-size: 20px;
@@ -348,4 +357,12 @@
       }
     }
   }
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #262626;
+  margin-bottom: 16px;
+  padding: 0 24px;
 }
