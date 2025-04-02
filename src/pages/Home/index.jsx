@@ -2,31 +2,20 @@ import {
   Card,
   Col,
   Row,
-  Input,
-  Button,
-  Avatar,
-  List,
-  Dropdown,
-  Spin,
   Empty,
-  Tag
+  Spin,
 } from "antd";
-import {
-  MessageOutlined,
-  SendOutlined,
-  SettingOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import "./index.scss";
-import RichTextEditor from "../../components/RichTextEditor";
-import { API_ENDPOINTS } from "../../constants";
-import axiosClient from "../../helpers/axiosClient";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
+import axiosClient from "../../helpers/axiosClient";
+import { API_ENDPOINTS } from "../../constants";
 import ReportSection from "../../components/ReportSection";
-
-const { TextArea } = Input;
+import TimeHeader from "../../components/TimeHeader";
+import CheckInCard from "../../components/CheckInCard";
+import { formatTimeDiff,groupItemsByDate } from "../../utils/dateUtils";
+import { updateNestedComments } from "../../utils/commentUtils";
 
 const PROJECT_TABS = [
   {
@@ -59,8 +48,8 @@ const Home = (props) => {
     setProjectsTabKey(key);
   };
 
+  // Comment handlers
   const toggleCommentSection = (checkInId) => {
-    console.log("Clicked comment button for check-in ID:", checkInId);
     setCommentVisibleMap((prev) => ({
       ...prev,
       [checkInId]: !prev[checkInId],
@@ -92,6 +81,13 @@ const Home = (props) => {
     }));
   };
 
+  const handleKeyPress = (checkInId, e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmitComment(checkInId);
+    }
+  };
+
   const handleSubmitComment = async (checkInId) => {
     const newComment = newCommentMap[checkInId];
     if (!newComment || newComment.trim() === "") return;
@@ -107,10 +103,7 @@ const Home = (props) => {
         parent_id: replyToMap[checkInId] || null,
       };
 
-      const response = await axiosClient.post(
-        API_ENDPOINTS.COMMENT,
-        commentData
-      );
+      const response = await axiosClient.post(API_ENDPOINTS.COMMENT, commentData);
       const newCommentFromServer = response.data;
 
       // Update local state
@@ -121,18 +114,7 @@ const Home = (props) => {
               // Add as a reply to existing comment
               return {
                 ...checkIn,
-                comments: checkIn.comments.map((comment) => {
-                  if (comment.id === replyToMap[checkInId]) {
-                    return {
-                      ...comment,
-                      children: [
-                        ...(comment.children || []),
-                        newCommentFromServer,
-                      ],
-                    };
-                  }
-                  return comment;
-                }),
+                comments: updateNestedComments(checkIn.comments, replyToMap[checkInId], newCommentFromServer)
               };
             } else {
               // Add as a new top-level comment at the end
@@ -162,20 +144,14 @@ const Home = (props) => {
     }
   };
 
-  const handleKeyPress = (checkInId, e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSubmitComment(checkInId);
-    }
-  };
-
+  // Data fetching
   useEffect(() => {
     if (projectTabsKey === "allUpdates" || projectTabsKey === "checkIns") {
-      fetchCheckIns();
+      loadCheckIns();
     }
-  }, [teamId, projectTabsKey, isSubmittingComment]);
+  }, [teamId, projectTabsKey]);
 
-  const fetchCheckIns = async () => {
+  const loadCheckIns = async () => {
     setLoading(true);
     try {
       const response = await axiosClient.get(API_ENDPOINTS.CHECKIN, { 
@@ -189,28 +165,6 @@ const Home = (props) => {
     }
   };
 
-  // Function to format the time difference
-  const formatTimeDiff = (createdAt) => {
-    const created = new Date(createdAt);
-    const now = new Date();
-    const diffSeconds = Math.floor((now - created) / 1000);
-
-    if (diffSeconds < 60) return `${diffSeconds} seconds ago`;
-    if (diffSeconds < 3600)
-      return `${Math.floor(diffSeconds / 60)} minutes ago`;
-    if (diffSeconds < 86400)
-      return `${Math.floor(diffSeconds / 3600)} hours ago`;
-    if (diffSeconds < 604800)
-      return `${Math.floor(diffSeconds / 86400)} days ago`;
-
-    return created.toLocaleString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-      month: "short",
-      day: "numeric",
-    });
-  };
 
   // Function to group check-ins by date
   const groupCheckInsByDate = (checkIns) => {
@@ -255,91 +209,16 @@ const Home = (props) => {
     }, 0);
   };
 
-  // Sort comments by date before rendering (oldest to newest)
-  const sortComments = (comments = []) => {
-    return [...comments].sort(
-      (a, b) => new Date(a.created_at) - new Date(b.created_at)
-    );
-  };
-
-  const renderComment = (comment, checkInId, level = 0) => {
-    return (
-      <div key={comment.id} style={{ marginLeft: level * 24 }}>
-        <List.Item className="comment-item">
-          <div className="comment-avatar">
-            <Avatar>
-              {comment.created_by?.username?.substring(0, 2).toUpperCase() ||
-                "UN"}
-            </Avatar>
-          </div>
-          <div className="comment-content">
-            <div className="comment-author">
-              {comment.created_by?.username || "Unknown User"}
-            </div>
-            <div className="comment-text">{comment.content}</div>
-            <div className="comment-footer">
-              <span className="comment-time">
-                {formatTimeDiff(comment.created_at)}
-              </span>
-              <Button
-                type="link"
-                onClick={() => handleReplyClick(checkInId, comment.id)}
-              >
-                Reply
-              </Button>
-            </div>
-          </div>
-        </List.Item>
-
-        {comment.children?.map((child) =>
-          renderComment(child, checkInId, level + 1)
-        )}
-
-        {replyToMap[checkInId] === comment.id && (
-          <div className="reply-input" style={{ marginLeft: (level + 1) * 24 }}>
-            <div className="new-comment">
-              <div className="comment-avatar">
-                <Avatar>{user?.username?.substring(0, 2).toUpperCase() || "UN"}</Avatar>
-              </div>
-              <div className="comment-input-container">
-                <TextArea
-                  value={newCommentMap[checkInId] || ""}
-                  onChange={(e) => handleCommentChange(checkInId, e)}
-                  onKeyDown={(e) => handleKeyPress(checkInId, e)}
-                  placeholder="Write a reply..."
-                  autoSize={{ minRows: 1, maxRows: 4 }}
-                  className="comment-input"
-                  disabled={isSubmittingComment[checkInId]}
-                />
-                <Button
-                  type="primary"
-                  icon={
-                    isSubmittingComment[checkInId] ? (
-                      <Spin size="small" />
-                    ) : (
-                      <SendOutlined />
-                    )
-                  }
-                  onClick={() => handleSubmitComment(checkInId)}
-                  disabled={
-                    !newCommentMap[checkInId]?.trim() ||
-                    isSubmittingComment[checkInId]
-                  }
-                  className="send-button"
-                />
-                <Button
-                  onClick={() => handleCancelReply(checkInId)}
-                  style={{ marginLeft: 8 }}
-                  disabled={isSubmittingComment[checkInId]}
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
+  // Comment handlers object to pass to components
+  const commentHandlers = {
+    onReplyClick: handleReplyClick,
+    replyToMap,
+    onCancelReply: handleCancelReply,
+    newCommentMap,
+    onCommentChange: handleCommentChange,
+    onKeyPress: handleKeyPress,
+    onSubmitComment: handleSubmitComment,
+    isSubmittingComment,
   };
 
   const renderCheckInContent = () => {
@@ -356,134 +235,19 @@ const Home = (props) => {
         {Object.entries(groupCheckInsByDate(checkIns)).map(
           ([date, { weekday, checkIns: groupedCheckIns }]) => (
             <div key={date}>
-              <div className="time-card">
-                <div className="date-text">{weekday}</div>
-                <div className="time-text">{date}</div>
-              </div>
+              <TimeHeader weekday={weekday} date={date} />
 
               {groupedCheckIns.map((checkIn) => (
-                <div key={checkIn.id} className="post-container">
-                  <div className="post-header">
-                    <div className="avatar">
-                      {checkIn.created_by?.username
-                        ?.substring(0, 2)
-                        .toUpperCase() || "NP"}
-                    </div>
-                    <div className="post-info">
-                      <p className="post-author">
-                        {checkIn.created_by?.username?.toUpperCase() ||
-                          "UNKNOWN USER"}
-                      </p>
-                      <p className="post-time">
-                        {formatTimeDiff(checkIn.created_at)}
-                        <Tag color="green" style={{ marginLeft: 8 }}>Check-in</Tag>
-
-                      </p>
-                    </div>
-                    <div className="post-tag">Check-in</div>
-                    <Dropdown
-                      menu={{
-                        items: [
-                          {
-                            key: "edit",
-                            label: "Edit",
-                            icon: <SettingOutlined />,
-                          },
-                          {
-                            key: "view-detail",
-                            label: "View Detail",
-                            icon: <UserOutlined />,
-                          },
-                        ],
-                      }}
-                      trigger={["click"]}
-                    >
-                      <div className="post-menu">...</div>
-                    </Dropdown>
-                  </div>
-
-                  <div className="post-content">
-                    <div className="post-section">
-                      <RichTextEditor
-                        initValue={
-                          checkIn.object?.content || checkIn.content
-                        }
-                        readOnly={true}
-                      />
-                    </div>
-                    <div className="post-footer">
-                      <div
-                        className={`comment-section ${commentVisibleMap[checkIn.id] ? "active" : ""}`}
-                        onClick={() => toggleCommentSection(checkIn.id)}
-                      >
-                        <MessageOutlined />
-                        <span>
-                          {getCommentCount(checkIn.comments)} comments
-                        </span>
-                      </div>
-                    </div>
-
-                    {commentVisibleMap[checkIn.id] && (
-                      <div className="comments-container">
-                        <List
-                          itemLayout="horizontal"
-                          dataSource={
-                            sortComments(checkIn.comments) || []
-                          }
-                          className="comments-list"
-                          renderItem={(comment) =>
-                            renderComment(comment, checkIn.id)
-                          }
-                        />
-
-                        {!replyToMap[checkIn.id] && (
-                          <div className="new-comment">
-                            <div className="comment-avatar">
-                              <Avatar>
-                                {user?.username
-                                  ?.substring(0, 2)
-                                  .toUpperCase() || "UN"}
-                              </Avatar>
-                            </div>
-                            <div className="comment-input-container">
-                              <TextArea
-                                value={newCommentMap[checkIn.id] || ""}
-                                onChange={(e) =>
-                                  handleCommentChange(checkIn.id, e)
-                                }
-                                onKeyDown={(e) =>
-                                  handleKeyPress(checkIn.id, e)
-                                }
-                                placeholder="Write a comment..."
-                                autoSize={{ minRows: 1, maxRows: 4 }}
-                                className="comment-input"
-                                disabled={isSubmittingComment[checkIn.id]}
-                              />
-                              <Button
-                                type="primary"
-                                icon={
-                                  isSubmittingComment[checkIn.id] ? (
-                                    <Spin size="small" />
-                                  ) : (
-                                    <SendOutlined />
-                                  )
-                                }
-                                onClick={() =>
-                                  handleSubmitComment(checkIn.id)
-                                }
-                                disabled={
-                                  !newCommentMap[checkIn.id]?.trim() ||
-                                  isSubmittingComment[checkIn.id]
-                                }
-                                className="comment-send"
-                              />
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <CheckInCard
+                  key={checkIn.id}
+                  checkIn={checkIn}
+                  formatTimeDiff={formatTimeDiff}
+                  commentVisibleMap={commentVisibleMap}
+                  toggleCommentSection={toggleCommentSection}
+                  getCommentCount={getCommentCount}
+                  commentHandlers={commentHandlers}
+                  currentUser={user}
+                />
               ))}
             </div>
           )
