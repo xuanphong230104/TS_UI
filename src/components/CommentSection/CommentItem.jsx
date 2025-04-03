@@ -2,7 +2,6 @@ import React from 'react';
 import { List, Button } from 'antd';
 import UserAvatar from '../UserAvatar';
 import CommentInput from './CommentInput';
-import { formatTimeDiff } from '../../utils/dateUtils';
 
 const CommentItem = ({
   comment,

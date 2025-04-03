@@ -1,0 +1,85 @@
+.checkin-comparison {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    
+    .ant-divider {
+      margin: 0 0 16px;
+      
+      .ant-divider-inner-text {
+        font-size: 14px;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+    }
+    
+    .checkin-content {
+      .checkin-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        
+        .checkin-author {
+          font-size: 12px;
+          color: #666;
+        }
+      }
+      
+      .checkin-body {
+        padding: 12px;
+        background: white;
+        border-radius: 6px;
+        border: 1px dashed #e8e8e8;
+      }
+    }
+    
+    .no-checkin {
+      text-align: center;
+      color: #999;
+      padding: 20px;
+      font-style: italic;
+    }
+    
+    // Task comparison section
+    .task-comparison {
+      margin-top: 12px;
+      padding: 12px;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+      border: 1px dashed #d0d7de;
+      
+      .comparison-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eaecef;
+        
+        .comparison-title {
+          font-size: 14px;
+          font-weight: 500;
+          color: #444;
+        }
+      }
+      
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        
+        .comparison-column {
+          h4 {
+            margin: 0 0 8px;
+            font-size: 13px;
+            color: #666;
+          }
+        }
+      }
+    }
+  }

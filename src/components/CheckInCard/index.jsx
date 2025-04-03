@@ -4,7 +4,7 @@ import { MessageOutlined, SettingOutlined, UserOutlined } from '@ant-design/icon
 import UserAvatar from '../UserAvatar';
 import RichTextEditor from '../RichTextEditor';
 import CommentSection from '../CommentSection';
-
+import './index.scss';
 
 const CheckInCard = ({
   checkIn,
@@ -14,6 +14,7 @@ const CheckInCard = ({
   getCommentCount,
   commentHandlers,
   currentUser,
+  prefixedId, // New prop to handle prefixed IDs
 }) => {
   const {
     id,
@@ -24,16 +25,8 @@ const CheckInCard = ({
     comments = [],
   } = checkIn;
 
-  const {
-    onReplyClick,
-    replyToMap,
-    onCancelReply,
-    newCommentMap,
-    onCommentChange,
-    onKeyPress,
-    onSubmitComment,
-    isSubmittingComment,
-  } = commentHandlers;
+  // Use the prefixed ID if available
+  const itemId = prefixedId || id;
 
   return (
     <div className="post-container">
@@ -80,27 +73,27 @@ const CheckInCard = ({
         </div>
         <div className="post-footer">
           <div
-            className={`comment-section ${commentVisibleMap[id] ? 'active' : ''}`}
-            onClick={() => toggleCommentSection(id)}
+            className={`comment-section ${commentVisibleMap[itemId] ? 'active' : ''}`}
+            onClick={toggleCommentSection}
           >
             <MessageOutlined />
             <span>{getCommentCount(comments)} comments</span>
           </div>
         </div>
 
-        {commentVisibleMap[id] && (
+        {commentVisibleMap[itemId] && (
           <CommentSection
             comments={comments}
-            checkInId={id}
+            checkInId={itemId}
             formatTimeDiff={formatTimeDiff}
-            onReplyClick={onReplyClick}
-            replyToMap={replyToMap}
-            onCancelReply={onCancelReply}
-            newCommentMap={newCommentMap}
-            onCommentChange={onCommentChange}
-            onKeyPress={onKeyPress}
-            onSubmitComment={onSubmitComment}
-            isSubmittingComment={isSubmittingComment}
+            onReplyClick={commentHandlers.onReplyClick}
+            replyToMap={commentHandlers.replyToMap}
+            onCancelReply={commentHandlers.onCancelReply}
+            newCommentMap={commentHandlers.newCommentMap}
+            onCommentChange={commentHandlers.onCommentChange}
+            onKeyPress={commentHandlers.onKeyPress}
+            onSubmitComment={commentHandlers.onSubmitComment}
+            isSubmittingComment={commentHandlers.isSubmittingComment}
             currentUser={currentUser}
           />
         )}

@@ -3,11 +3,11 @@ import { List } from 'antd';
 import CommentItem from './CommentItem';
 import CommentInput from './CommentInput';
 import { sortComments } from '../../utils/commentUtils';
-import { formatTimeDiff } from '../../utils/dateUtils';
 
 const CommentSection = ({
   comments = [],
   checkInId,
+  formatTimeDiff,
   onReplyClick,
   replyToMap,
   onCancelReply,
@@ -21,6 +21,11 @@ const CommentSection = ({
   // Sort comments by date (oldest to newest)
   const sortedComments = sortComments(comments);
 
+  // Get correct values for this specific item
+  const isReplyingToComment = replyToMap[checkInId];
+  const commentValue = newCommentMap[checkInId] || '';
+  const isSubmitting = isSubmittingComment[checkInId];
+
   return (
     <div className="comments-container">
       <List
@@ -32,27 +37,27 @@ const CommentSection = ({
             comment={comment}
             checkInId={checkInId}
             formatTimeDiff={formatTimeDiff}
-            onReplyClick={onReplyClick}
-            replyToId={replyToMap[checkInId]}
-            onCancelReply={onCancelReply}
-            newCommentValue={newCommentMap[checkInId] || ''}
+            onReplyClick={(_, commentId) => onReplyClick(checkInId, commentId)}
+            replyToId={isReplyingToComment}
+            onCancelReply={() => onCancelReply(checkInId)}
+            newCommentValue={commentValue}
             onCommentChange={onCommentChange}
             onKeyPress={onKeyPress}
             onSubmitComment={onSubmitComment}
-            isSubmittingComment={isSubmittingComment[checkInId]}
+            isSubmittingComment={isSubmitting}
             currentUser={currentUser}
           />
         )}
       />
 
-      {!replyToMap[checkInId] && (
+      {!isReplyingToComment && (
         <CommentInput
           username={currentUser?.username}
-          value={newCommentMap[checkInId] || ''}
-          onChange={(e) => onCommentChange(checkInId, e)}
-          onKeyDown={(e) => onKeyPress(checkInId, e)}
-          onSubmit={() => onSubmitComment(checkInId)}
-          isSubmitting={isSubmittingComment[checkInId]}
+          value={commentValue}
+          onChange={onCommentChange}
+          onKeyDown={onKeyPress}
+          onSubmit={onSubmitComment}
+          isSubmitting={isSubmitting}
         />
       )}
     </div>
