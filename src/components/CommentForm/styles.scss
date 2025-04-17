@@ -1,0 +1,28 @@
+.new-comment {
+  display: flex;
+  margin-top: 16px;
+  align-items: flex-start;
+  
+  .comment-avatar {
+    margin-right: 12px;
+  }
+  
+  .comment-input-container {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    
+    .comment-input {
+      flex: 1;
+      border-radius: 8px;
+      resize: none;
+      margin-right: 8px;
+    }
+    
+    .send-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+} 

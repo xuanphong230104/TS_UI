@@ -1,0 +1,71 @@
+@import "../styles/variables";
+
+.app-layout {
+  min-height: 100vh;
+
+  .ant-layout-sider {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    height: 100vh;
+    overflow: auto;
+  }
+
+  .ant-layout {
+    margin-left: 200px; // Default sider width
+    transition: margin-left 0.2s;
+  }
+
+  .ant-layout-sider-collapsed + .ant-layout {
+    margin-left: 80px; // Collapsed sider width
+  }
+
+  .ant-layout-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 200px; // Default sider width
+    z-index: 999;
+    transition: left 0.2s;
+  }
+
+  .ant-layout-sider-collapsed + .ant-layout .ant-layout-header {
+    left: 80px; // Collapsed sider width
+  }
+
+  .content-wrapper {
+    margin-top: 64px; // Header height
+    padding: 8px;
+    min-height: 280px;
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: $screen-xs) {
+  .app-layout {
+    .ant-layout-sider {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 1000;
+    }
+
+    .ant-layout {
+      margin-left: 0;
+    }
+
+    .ant-layout-header {
+      position: fixed;
+      left: 0;
+      right: 0;
+    }
+
+    .content-wrapper {
+      margin-top: 64px;
+      padding: 12px;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.comment-item {
+  padding: 8px 0;
+  display: flex;
+  
+  .comment-avatar {
+    margin-right: 12px;
+  }
+  
+  .comment-content {
+    flex: 1;
+    
+    .comment-author {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .comment-text {
+      margin: 4px 0;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    
+    .comment-footer {
+      display: flex;
+      gap: 8px;
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.45);
+      
+      .comment-time {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.reply-input {
+  margin-bottom: 12px;
+} 
